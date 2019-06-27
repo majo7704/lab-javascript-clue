@@ -28,7 +28,7 @@ var mrGreen = new Characters("Jacob", "Green", "green", "He has a lot of connect
   // mrGreen.addToArray(mrGreen)
 var drOrchid = new Characters("Doctor", "Orchid", "white", "PhD in plant toxicology. Adopted daughter of Mr. Boddy", "http://www.radiotimes.com/uploads/images/Original/111967.jpg", "Scientist")
 var profPlum = new Characters("Victor", "Plum", "purple", "Billionare video game designer", "22", "https://metrouk2.files.wordpress.com/2016/07/professor-plum.jpg", "Designer")
-var misScarlet = new Characters("Designer", "Scarlet", "red", "She is an A-list movie star with a dark past", "31", "https://metrouk2.files.wordpress.com/2016/07/miss-scarlett.jpg", "Actor")
+var misScarlet = new Characters("Kasandra", "Scarlet", "red", "She is an A-list movie star with a dark past", "31", "https://metrouk2.files.wordpress.com/2016/07/miss-scarlett.jpg", "Actor")
 var mrsPeacock = new Characters("Eleanor", "Peacock", "blue", "She is from a wealthy family and uses her status and money to earn popularity", "36", " https://metrouk2.files.wordpress.com/2016/07/mrs-peacock.jpg", "Socialité")
 var mrMustard = new Characters("Jack", "Mustard", "yellow", "He is a former football player who tries to get by on his former glory", "62", "https://metrouk2.files.wordpress.com/2016/07/colonel-mustard.jpg", "Retired Football player")
 
@@ -96,42 +96,47 @@ function Game(charactersArray, weaponsArray, roomsArray){
     let randomI = Math.floor(Math.random() * arr.length);
     return arr[randomI];
   }
-
   this.characters = charactersArray;
   this.weapons = weaponsArray;
   this.rooms = roomsArray;
-
+  this.misteryEnvelope = []
   // this.character = this.randomSelector(charactersArray);
   // this.weapon = this.randomSelector(weaponsArray);
   // this.room = this.randomSelector(roomsArray);
 
-  this.pickMistery = function(func, array) {
-    let misteryEnvelope = [];
-    misteryEnvelope = [
-      this.randomSelector(this.characters),
-      this.randomSelector(this.weapons),
-      this.randomSelector(this.rooms),
-    ]
-    return misteryEnvelope;
-  }
 
- this.pickNewMistery = function() {
-   return {
+ this.pickMistery = function() {
+   let mistery =  {
         character : this.randomSelector(this.characters),
         weapon : this.randomSelector(this.weapons),
         room : this.randomSelector(this.rooms)
     }
-  }
 
+    this.misteryEnvelope = mistery
+    return mistery
+  }
+  this.revealMistery = function (array) {
+    // let misteryEnvelope = this.misteryEnvelope;
+    return this.misteryEnvelope.character.first_name + " " + this.misteryEnvelope.character.last_name + " killed Mr.Smith using the " + this.misteryEnvelope.weapon.name + " in the " + this.misteryEnvelope.room.name + "!!!!";
+    };
 }
+
 // console.log(Game(charactersArray, weaponsArray, roomsArray));
 var game = new Game(charactersArray, weaponsArray, roomsArray);
-var game2 = new Game(charactersArray, weaponsArray, roomsArray);
 
-console.log(game.pickNewMistery().character);
 
-var mysteryObj = game.pickNewMistery();
-console.log(mysteryObj.character.first_name);
+console.log(game.pickMistery().character);
+console.log(game.pickMistery().weapon);
+console.log(game.pickMistery().room);
 
-var mysteryArr = game2.pickMistery();
-console.log(mysteryArr[0].first_name)
+
+
+console.log(game.revealMistery());
+
+
+//var misteryObj = game.pickMistery();
+//console.log(misteryObj.character.first_name);
+
+
+
+
